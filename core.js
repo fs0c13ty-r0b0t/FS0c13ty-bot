@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { Client, Collection, WebhookClient } = require('discord.js')
 
 const { token, webhook, port } = require('./config.json')
