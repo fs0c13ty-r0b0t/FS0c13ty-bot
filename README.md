@@ -1,8 +1,8 @@
 # FS0c13ty
 
-[![GitHub issues](https://img.shields.io/github/issues/LucasCtrl/FS0c13ty.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/issues)
-[![GitHub stars](https://img.shields.io/github/stars/LucasCtrl/FS0c13ty.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/LucasCtrl/FS0c13ty.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/network)
+[![GitHub issues](https://img.shields.io/github/issues/fs0c13ty-r0b0t/FS0c13ty-bot.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/issues)
+[![GitHub stars](https://img.shields.io/github/stars/fs0c13ty-r0b0t/FS0c13ty-bot.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/fs0c13ty-r0b0t/FS0c13ty-bot.svg)](https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot/network)
 
 A discord bot made to help you in moderation.<br>
 Need help? Join our discord server: [https://discord.gg/nEDcagb](https://discord.gg/nEDcagb)
