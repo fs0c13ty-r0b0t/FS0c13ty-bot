@@ -1,0 +1,7 @@
+# Exclude all modules
+node_modules/
+
+# Exclude config files
+config.json
+FS0c13ty-pm2.json
+
