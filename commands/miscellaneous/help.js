@@ -18,7 +18,7 @@ module.exports = {
       .setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
       .addField('\u200b', '📍  **INFORMATIONS**', false)
       .addField('Support', 'https://discord.gg/nEDcagb', true)
-      .addField('Source code', 'https://github.com/LucasCtrl/FS0c13ty', true)
+      .addField('Source code', 'https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot', true)
       .addField('📁 Version', version, true)
       .addField('\u200b', '📍  **COMMANDS LIST**', false)
 
