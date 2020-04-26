@@ -1,9 +1,9 @@
 {
   "name": "fs0c13ty",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "A discord bot made for moderation",
   "main": "core.js",
-  "repository": "https://github.com/LucasCtrl/FS0c13ty",
+  "repository": "https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot",
   "author": "LucasCtrl <lucasalt@protonmail.com>",
   "license": "AGPL-3.0",
   "private": true,
