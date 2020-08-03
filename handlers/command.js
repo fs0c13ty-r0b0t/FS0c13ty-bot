@@ -11,5 +11,7 @@ module.exports = (bot) => {
     }
   }
 
-  ;['miscellaneous', 'moderation', 'owner'].forEach((x) => load(x))
+  const dirs = ['miscellaneous', 'moderation', 'owner']
+
+  dirs.forEach((x) => load(x))
 }

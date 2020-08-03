@@ -10,21 +10,10 @@ module.exports = {
     command: 'purge',
     aliases: ['clear'],
     displayHelp: true,
+    permissionNeeded: 'MANAGE_MESSAGES',
   },
 
   run: async (bot, message, args) => {
-    await message.delete()
-
-    // Check if the user have the permission to delete messages
-    if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-      message.reply('You are not allowed to do that!').then((m) => {
-        setTimeout(() => {
-          m.delete()
-        }, 5000)
-      })
-      return
-    }
-
     // Get amount and user
     const user = message.mentions.users.first()
     const amount = parseInt(args[0])

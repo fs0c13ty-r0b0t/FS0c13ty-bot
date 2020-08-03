@@ -14,7 +14,6 @@ module.exports = {
   },
 
   run: async (bot, message, args) => {
-    message.delete()
     const choice = message.content
       .slice(prefix.length + 'survey'.length) // Escape prefix + command name
       .trim() // Escape space before and after the array

@@ -12,8 +12,6 @@ module.exports = {
   },
 
   run: async (bot, message, args) => {
-    message.delete()
-
     const embed = new MessageEmbed()
       .setColor(black)
       .setTitle('Need help?')

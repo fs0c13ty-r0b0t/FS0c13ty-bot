@@ -9,20 +9,10 @@ module.exports = {
     description: 'kick a member from your server',
     command: 'kick',
     displayHelp: true,
+    permissionNeeded: 'KICK_MEMBERS',
   },
 
   run: async (bot, message, args) => {
-    message.delete()
-
-    if (!message.member.hasPermission('KICK_MEMBERS')) {
-      message.reply('You are not allowed to do that!').then((m) => {
-        setTimeout(() => {
-          m.delete()
-        }, 5000)
-      })
-      return
-    }
-
     const kickMember = message.mentions.users.first()
     if (!kickMember) {
       message.reply('Please mention the person to be kicked').then((m) =>

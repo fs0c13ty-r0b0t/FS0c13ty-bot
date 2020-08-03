@@ -12,8 +12,6 @@ module.exports = {
   },
 
   run: async (bot, message, args) => {
-    message.delete()
-
     let memoryStats = process.memoryUsage()
 
     const embed = new MessageEmbed()

@@ -12,8 +12,6 @@ module.exports = {
   },
 
   run: async (bot, message, args) => {
-    message.delete()
-
     const beforePing = new MessageEmbed().setColor(black).setDescription('Pinging...')
 
     message.channel.send(beforePing).then((m) => {

@@ -9,20 +9,10 @@ module.exports = {
     description: 'Ban a member from your server',
     command: 'ban',
     displayHelp: true,
+    permissionNeeded: 'BAN_MEMBERS',
   },
 
   run: async (bot, message, args) => {
-    message.delete()
-
-    if (!message.member.hasPermission('BAN_MEMBERS')) {
-      message.reply('You are not allowed to do that!').then((m) => {
-        setTimeout(() => {
-          m.delete()
-        }, 5000)
-      })
-      return
-    }
-
     const banMember = message.mentions.users.first()
     if (!banMember) {
       message.reply('Please mention the person to be banned').then((m) =>

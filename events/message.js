@@ -53,5 +53,14 @@ module.exports = async (bot, webhook, message) => {
 
   // -------------------- Command execution --------------------
 
+  message.delete()
+  if (!message.member.hasPermission(cmd.config.permissionNeeded)) {
+    message.reply('You are not allowed to do that!').then((m) => {
+      setTimeout(() => {
+        m.delete()
+      }, 5000)
+    })
+    return
+  }
   cmd.run(bot, message, args) // Run the command
 }
