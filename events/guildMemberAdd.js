@@ -14,14 +14,18 @@ module.exports = (bot, webhook, member) => {
 
   const getLogsChannel = member.guild.channels.cache.find((c) => c.name === 'logs')
 
-  if (getGeneralChannel.permissionsFor(bot.user).has(['SEND_MESSAGES'])) {
-    // Check if the bot has the permission to send a message in the channel
-    getGeneralChannel.send(embed)
+  if (getGeneralChannel !== undefined) {
+    if (getGeneralChannel.permissionsFor(bot.user).has(['SEND_MESSAGES'])) {
+      // Check if the bot has the permission to send a message in the channel
+      getGeneralChannel.send(embed)
+    }
   }
 
-  if (getLogsChannel.permissionsFor(bot.user).has(['SEND_MESSAGES'])) {
-    // Check if the bot has the permission to send a message in the channel
-    getLogsChannel.send(embed)
+  if (getLogsChannel !== undefined) {
+    if (getLogsChannel.permissionsFor(bot.user).has(['SEND_MESSAGES'])) {
+      // Check if the bot has the permission to send a message in the channel
+      getLogsChannel.send(embed)
+    }
   }
 
   console.log(`${member.user.tag} has just joined ${member.guild.name}`)
