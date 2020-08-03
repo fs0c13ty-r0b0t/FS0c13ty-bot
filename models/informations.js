@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 module.exports = {
   getApiVersion() {
     return new Promise((resolve, reject) => {
-      fetch(`http://localhost:8080/`, {
+      fetch(`${process.env.APIURL}/`, {
         headers: { 'access-token': process.env.TOKEN },
       })
         .then((res) => res.json())
