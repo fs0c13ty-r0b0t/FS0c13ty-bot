@@ -1,6 +1,6 @@
 {
   "name": "fs0c13ty-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A discord bot made for moderation",
   "main": "core.js",
   "repository": "https://github.com/fs0c13ty-r0b0t/FS0c13ty-bot",
