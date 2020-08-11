@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { Client, Collection, WebhookClient } = require('discord.js')
 
-const { token, webhook } = require('./config.json')
+const { token, webhook, cooldownDuration } = require('./config.json')
 
 const bot = new Client({
   autoReconnect: true,
@@ -11,6 +11,10 @@ const bot = new Client({
 // -------------------- Webhooks --------------------
 
 const logsWebhook = new WebhookClient(webhook.id, webhook.token)
+
+// -------------------- Leveling cooldown --------------------
+bot.cooldown = new Set()
+bot.cooldownDuration = cooldownDuration
 
 // -------------------- Commands/Events handling --------------------
 

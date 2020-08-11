@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js')
-const { prefix, colors } = require('../config.json')
+const { prefix, colors, cooldownDuration } = require('../config.json')
+
+const { getUser, updateUser } = require('../models/users')
 
 module.exports = async (bot, webhook, message) => {
   if (message.author.bot) return // Ignore all bots
@@ -19,8 +21,6 @@ module.exports = async (bot, webhook, message) => {
     if (!cmd) return // If that command doesn't exist, silently exit and do nothing
 
     // -------------------- Private logs --------------------
-
-    console.log(message.guild)
 
     const privateEmbed = new MessageEmbed()
       .setColor(colors.primary)
@@ -62,6 +62,45 @@ module.exports = async (bot, webhook, message) => {
 
   // -------------------- Leveling system --------------------
   else {
-    return
+    // Just a little trick to know if I'm under cooldown or not
+    if (bot.cooldown.has(message.author.id) && process.env.NODE_ENV === 'dev') {
+      message.delete()
+    }
+
+    // Update the user if he's not under cooldown
+    if (!bot.cooldown.has(message.author.id)) {
+      let user = await getUser(message.author.id, message.guild.id).then((user) => user)
+
+      // Add a message to the counter
+      user.levelData.messages++
+
+      // Give a random number of xp (between 10 and 25)
+      const xpGained = Math.floor(Math.random() * 15) + 10
+      const xpToNextLevel = 5 * Math.pow(user.levelData.level, 2) + 36 * user.levelData.level + 89
+
+      // Check if the user passed a new level
+      if (user.levelData.experience >= xpToNextLevel) {
+        user.levelData.level++
+        user.levelData.experience = 0
+
+        message.reply("You gained a level!\nYou're now at the level " + user.levelData.level)
+      } else {
+        user.levelData.experience += xpGained
+      }
+
+      let payload = {
+        levelData: user.levelData,
+      }
+      // Update the user rank data
+      updateUser(message.author.id, message.guild.id, payload)
+
+      bot.cooldown.add(message.author.id)
+    }
+
+    // After the designated time, delete the user from the cooldown array
+    let cDuration = process.env.NODE_ENV === 'dev' ? 10000 : cooldownDuration
+    setTimeout(() => {
+      bot.cooldown.delete(message.author.id)
+    }, cDuration)
   }
 }

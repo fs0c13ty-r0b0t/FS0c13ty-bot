@@ -1,6 +1,7 @@
 {
   "token": "YOUR_BOT_TOKEN_HERE",
   "prefix": "/",
+  "cooldownDuration": 10000, // In milliseconds
   "webhook": {
     "id": "",
     "token": ""
