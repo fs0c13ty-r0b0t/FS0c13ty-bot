@@ -3,3 +3,4 @@ node_modules/
 
 # Exclude config files
 config.json
+.env
