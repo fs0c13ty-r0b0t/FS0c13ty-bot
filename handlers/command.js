@@ -11,7 +11,9 @@ module.exports = (bot) => {
     }
   }
 
-  const dirs = ['miscellaneous', 'moderation', 'owner', 'ranking']
+  const dirs = ['Info']
+
+  if (process.env.NODE_ENV === 'dev') dirs.push('Test')
 
   dirs.forEach((x) => load(x))
 }

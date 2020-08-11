@@ -2,9 +2,11 @@ require('dotenv').config()
 
 const { Client, Collection, WebhookClient } = require('discord.js')
 
-const { token, webhook, port } = require('./config.json')
+const { token, webhook } = require('./config.json')
 
-const bot = new Client()
+const bot = new Client({
+  autoReconnect: true,
+})
 
 // -------------------- Webhooks --------------------
 

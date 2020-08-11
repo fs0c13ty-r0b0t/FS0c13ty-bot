@@ -1,8 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const { prefix } = require('../config.json')
-const { black } = require('../colors.json')
-
-const { createUser, getUser, updateUserLevel } = require('../models/users')
+const { prefix, colors } = require('../config.json')
 
 module.exports = async (bot, webhook, message) => {
   if (message.author.bot) return // Ignore all bots
@@ -23,24 +20,21 @@ module.exports = async (bot, webhook, message) => {
 
     // -------------------- Private logs --------------------
 
+    console.log(message.guild)
+
     const privateEmbed = new MessageEmbed()
-      .setColor(black)
-      .setTitle('New command')
-      .setDescription(message.content)
-      .addField('Author', message.author, true)
-      .addField('Channel', `#${message.channel.name}`, true)
-      .setFooter(`On ${message.guild.name}`, message.guild.iconURL)
+      .setColor(colors.primary)
+      .setTitle(message.content)
+      .setFooter(`${message.author.tag} | ${message.guild.name}`, message.guild.iconURL())
 
     webhook.send(privateEmbed)
 
     // -------------------- Public logs --------------------
 
     const publicEmbed = new MessageEmbed()
-      .setColor(black)
-      .setTitle('New command')
-      .setDescription(message.content)
-      .addField('Author', message.author, true)
-      .addField('Channel', message.channel, true)
+      .setColor(colors.primary)
+      .setTitle(message.content)
+      .setFooter(`${message.author.tag} | #${message.channel.name}`, message.author.avatarURL())
 
     const logsChannel = message.guild.channels.cache.find((c) => c.name === 'logs')
 
@@ -68,40 +62,6 @@ module.exports = async (bot, webhook, message) => {
 
   // -------------------- Leveling system --------------------
   else {
-    function updateUser(userData) {
-      const rankData = {
-        level: userData.rank.level,
-        messages: userData.rank.messages,
-        experience: userData.rank.experience,
-      }
-
-      // Add a message to the counter
-      rankData.messages++
-
-      // Give a random number of xp (between 10 and 25)
-      const xpGained = Math.floor(Math.random() * 15) + 10
-      const xpToNextLevel = 5 * Math.pow(rankData.level, 2) + 36 * rankData.level + 89
-
-      // Check if the user passed a new level
-      if (rankData.experience >= xpToNextLevel) {
-        rankData.level++
-        rankData.experience = 0
-
-        message.reply("You gained a level!\nYou're now at the level " + rankData.level)
-      } else {
-        rankData.experience += xpGained
-      }
-
-      // Update the user rank data
-      updateUserLevel(message.guild.id, message.author.id, rankData)
-    }
-
-    getUser(message.guild.id, message.author.id).then((user) => {
-      if (user.data !== null) {
-        updateUser(user.data)
-      } else {
-        createUser(message.guild.id, message.author.id).then((user) => updateUser(user.data))
-      }
-    })
+    return
   }
 }

@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const { prefix } = require('../../config.json')
-const { black } = require('../../colors.json')
+const { prefix, colors } = require('../../config.json')
 
 module.exports = {
   config: {
@@ -12,13 +11,13 @@ module.exports = {
   },
 
   run: async (bot, message, args) => {
-    const beforePing = new MessageEmbed().setColor(black).setDescription('Pinging...')
+    const beforePing = new MessageEmbed().setColor(colors.primary).setDescription('Pinging...')
 
     message.channel.send(beforePing).then((m) => {
       let ping = m.createdTimestamp - message.createdTimestamp
 
       const afterPing = new MessageEmbed()
-        .setColor(black)
+        .setColor(colors.primary)
         .setDescription(`Pong! :ping_pong:\nBot Latency: \`${ping}ms\`, API Latency: \`${Math.round(bot.ws.ping)}ms\``)
 
       m.edit(afterPing)

@@ -1,9 +1,15 @@
 {
   "token": "YOUR_BOT_TOKEN_HERE",
   "prefix": "/",
-  "version": "1.0.0",
   "webhook": {
     "id": "",
     "token": ""
+  },
+  "colors": {
+    "primary": "#191919",
+    "info": "#3498DB",
+    "success": "#2ECC71",
+    "warning": "#F1C40F",
+    "error": "#E74C3C"
   }
 }
