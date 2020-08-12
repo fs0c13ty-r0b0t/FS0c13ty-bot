@@ -22,7 +22,7 @@ module.exports = {
       fetch(`${process.env.APIURL}/users`, {
         method: 'POST',
         headers: {
-          authorization: 'Basic 0123456789',
+          authorization: `Basic ${process.env.TOKEN}`,
           'content-type': 'application/json',
         },
         body: JSON.stringify({
@@ -42,7 +42,7 @@ module.exports = {
       fetch(`${process.env.APIURL}/users/${userId}@${guildId}`, {
         method: 'PUT',
         headers: {
-          authorization: 'Basic 0123456789',
+          authorization: `Basic ${process.env.TOKEN}`,
           'content-type': 'application/json',
         },
         body: JSON.stringify(data),
