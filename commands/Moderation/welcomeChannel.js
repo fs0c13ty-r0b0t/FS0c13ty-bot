@@ -5,7 +5,7 @@ const { updateGuild } = require('../../models/guilds')
 
 module.exports = {
   config: {
-    name: 'Welcom channel',
+    name: 'Welcome channel',
     usage: `${prefix}wc <channelId>`,
     description: 'Change the welcome channel',
     command: 'wc',
@@ -14,8 +14,18 @@ module.exports = {
 
   run: async (bot, message, args) => {
     if (args[0] !== undefined) {
-      message.channel.send(`Welcome channel set to <#${args[0]}>`).then((m) => setTimeout(() => m.delete(), 5000))
-      updateGuild(message.guild.id, { welcomeChannel: args[0] })
+      let channelId
+
+      if (args[0].startsWith('<')) {
+        // If the channel is mentionned
+        channelId = args[0].match(/\d+/)[0]
+      } else {
+        // If the given channel is an ID
+        channelId = args[0]
+      }
+
+      message.channel.send(`Welcome channel set to <#${channelId}>`).then((m) => setTimeout(() => m.delete(), 5000))
+      updateGuild(message.guild.id, { 'channels.welcomeChannel': channelId })
     } else {
       message.channel.send('Please provide a channel ID').then((m) => setTimeout(() => m.delete(), 5000))
     }
