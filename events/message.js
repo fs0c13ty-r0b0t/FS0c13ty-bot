@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js')
 const { prefix, colors, cooldownDuration } = require('../config.json')
 
 const { getUser, updateUser } = require('../models/users')
+const { getGuild } = require('../models/guild')
 
 module.exports = async (bot, webhook, message) => {
   if (message.author.bot) return // Ignore all bots
@@ -83,7 +84,23 @@ module.exports = async (bot, webhook, message) => {
         user.levelData.level++
         user.levelData.experience = 0
 
-        message.reply("You gained a level!\nYou're now at the level " + user.levelData.level)
+        let guildData = await getGuild(member.guild.id).then((data) => data)
+
+        if (guildData.channels.logsChannel !== null) {
+          const logsChannel = member.guild.channels.cache.find((c) => c.id === guildData.channels.logsChannel)
+
+          if (logsChannel) {
+            // If the logs channel exist, send the logs
+            if (logsChannel.permissionsFor(bot.user).has(['SEND_MESSAGES'])) {
+              // Check if the bot has the permission to send a message in the channel
+              logsChannel.send(
+                `<@${message.author.id}>, you gained a level!\nYou're now at the level " + user.levelData.level`
+              )
+            }
+          }
+        } else {
+          message.reply("you gained a level!\nYou're now at the level " + user.levelData.level)
+        }
       } else {
         user.levelData.experience += xpGained
       }
