@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js')
 const { colors } = require('../config.json')
 
 const { createGuild } = require('../models/guilds')
+const { createUser } = require('../models/users')
 
 module.exports = (bot, webhook, guild) => {
   const embed = new MessageEmbed()
@@ -10,6 +11,8 @@ module.exports = (bot, webhook, guild) => {
 
   webhook.send(embed)
   console.log(`Join ${guild.name} with ${guild.memberCount} users`)
+
+  guild.members.cache.map((m) => createUser(m.id, guild.id))
 
   createGuild(guild.id)
 }
